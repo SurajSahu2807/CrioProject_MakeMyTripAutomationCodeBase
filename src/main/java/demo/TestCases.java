@@ -65,14 +65,13 @@ public class TestCases {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='commonModal__close']")));
             driver.findElement(By.className("commonModal__close")).click();
             String ExpectedUrl = "https://www.makemytrip.com/";
-            if (driver.getCurrentUrl().equals(ExpectedUrl)) 
+            if (driver.getCurrentUrl().equals(ExpectedUrl))
                 System.out.println("end Test case: testCase01");
             // System.out.println("end Test case: testCase01");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     // Get Flight Details from Bangalore to New Delhi
     public void testCase02() {
@@ -86,24 +85,30 @@ public class TestCases {
                     .findElement(By.xpath("//div[@class='flt_fsw_inputBox searchCity inactiveWidget ']//input"));
             FromCity.click();
             WebElement FromtextArea = driver.findElement(By.xpath("//input[@placeholder='From']"));
-            FromtextArea.sendKeys("BLR");
+            FromtextArea.sendKeys("blr");
+            // List<WebElement> FromCityNearByAirports = driver.findElements(By.xpath(
+            // "//div[@class='autoSuggestPlugin
+            // hsw_autocomplePopup']//ul[@role='listbox']/li//p/span[@class='sr_iata font14
+            // lightGreyText latoBold']"));
             List<WebElement> FromCityNearByAirports = driver.findElements(By.xpath(
-                    "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//p/span[@class='sr_iata font14 lightGreyText latoBold']"));
+                    "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//p[@class='searchedResult font14 blackText appendBottom5']//span/span"));
             for (WebElement eachIf : FromCityNearByAirports) {
-                if (eachIf.getText().contains("BLR")) {
+                if (eachIf.getText().contains("Bengaluru")) {
+                    Thread.sleep(4000);
                     eachIf.click();
                     break;
-                }
+                } 
             }
             WebElement ToCity = driver
                     .findElement(By.xpath("//div[@class='flt_fsw_inputBox searchToCity inactiveWidget ']//input"));
             ToCity.click();
             WebElement TolistTextarea = driver.findElement(By.xpath("//input[@placeholder='To']"));
-            TolistTextarea.sendKeys("DEL");
-            List<WebElement> ToCityNearByAirports = driver.findElements(By.xpath(
-                    "//div[@class='autoSuggestPlugin hsw_autocomplePopup makeFlex column spaceBetween']//ul[@role='listbox']/li//p/span[@class='sr_iata font14 lightGreyText latoBold']"));
+            TolistTextarea.sendKeys("del");
+            // List<WebElement> ToCityNearByAirports = driver.findElements(By.xpath(
+            //         "//div[@class='autoSuggestPlugin hsw_autocomplePopup makeFlex column spaceBetween']//ul[@role='listbox']/li//p/span[@class='sr_iata font14 lightGreyText latoBold']"));
+            List<WebElement> ToCityNearByAirports = driver.findElements(By.xpath("//div[@class='autoSuggestPlugin hsw_autocomplePopup makeFlex column spaceBetween']//ul[@role='listbox']/li//p/span[@class='makeFlex flexOne spaceBetween appendRight10']/span"));
             for (WebElement eachIf : ToCityNearByAirports) {
-                if (eachIf.getText().contains("DEL")) {
+                if (eachIf.getText().contains("New Delhi")) {
                     eachIf.click();
                     break;
                 }
@@ -124,7 +129,6 @@ public class TestCases {
 
             }
 
-            // //
             // driver.findElement(By.xpath("(//div[@class='DayPicker-Month'])[2]")).click();
             List<WebElement> AllDays = driver.findElements(By.xpath(
                     "//div[@class='DayPicker-Week']//div[@class='DayPicker-Day']//div[@class='dateInnerCell']/p[1]"));
@@ -139,7 +143,8 @@ public class TestCases {
             SearchBtn.click();
             int i = 0;
             // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='commonOverlay ']")));
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='commonOverlay
+            // ']")));
             // driver.findElement(By.xpath("//*[text()='OKAY, GOT IT!']")).click();
             Thread.sleep(5000);
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -154,26 +159,24 @@ public class TestCases {
             List<WebElement> AllPrizes = driver.findElements(
                     By.xpath("//div[contains(@class,'priceSection')]//div[contains(@class,'blackText')]"));
             // System.out.println(AllPrizes.size());
-            // for(WebElement ff : AllPrizes){
-            // System.out.println(ff.getText());
-            // }
-            // for (WebElement e : AllFlightsName) {
-            //     System.out.print(e.getText() + " ---> ");
-            //     for (int j = i; i <= AllPrizes.size();) {
-            //         System.out.print("Rs ." + AllPrizes.get(j).getText());
-            //         System.out.println();
-            //         i++;
-            //         break;
-            //     }
-            // }
+            for (WebElement ff : AllPrizes) {
+                System.out.println(ff.getText());
+            }
+            for (WebElement e : AllFlightsName) {
+                System.out.print(e.getText() + " ---> ");
+                for (int j = i; i <= AllPrizes.size();) {
+                    System.out.print("Rs ." + AllPrizes.get(j).getText());
+                    System.out.println();
+                    i++;
+                    break;
+                }
+            }
             System.out.println("end Test case: testCase02");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-   
 
     public void testCase03() throws InterruptedException {
         System.out.println("Start Test case: testCase03");
@@ -191,11 +194,12 @@ public class TestCases {
         WebElement TrainFrom = driver.findElement(By.xpath("//div[@class='rsw_inputBox selectRailCity'][1]"));
         TrainFrom.click();
         WebElement FromtextArea = driver.findElement(By.xpath("//input[@placeholder='From']"));
-        FromtextArea.sendKeys("YPR");
+        FromtextArea.sendKeys("ypr");
         Thread.sleep(5000);
         // System.out.println(driver.findElement(By.xpath(
-        //         "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//span[contains(@class,'grayText')]"))
-        //         .getText());
+        // "//div[@class='autoSuggestPlugin
+        // hsw_autocomplePopup']//ul[@role='listbox']/li//span[contains(@class,'grayText')]"))
+        // .getText());
         List<WebElement> FromCityAllTrains = driver.findElements(By.xpath(
                 "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//span[contains(@class,'grayText')]"));
         for (WebElement eachIf : FromCityAllTrains) {
@@ -208,12 +212,12 @@ public class TestCases {
         WebElement TrainTo = driver.findElement(By.xpath("//input[@placeholder='To']"));
         TrainTo.click();
         WebElement TolistTextarea = driver.findElement(By.xpath("//input[@placeholder='To']"));
-        TolistTextarea.sendKeys("NDLS");
+        TolistTextarea.sendKeys("ndls");
         Thread.sleep(5000);
         List<WebElement> ToCityAllTrains = driver.findElements(By.xpath(
-                "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//span[contains(@class,'grayText')]"));
+                "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']//li//p//span"));
         for (WebElement eachIf : ToCityAllTrains) {
-            if (eachIf.getText().contains("NDLS")) {
+            if (eachIf.getText().contains("Delhi")) {
                 Thread.sleep(5000);
                 eachIf.click();
                 break;
@@ -262,19 +266,17 @@ public class TestCases {
         Thread.sleep(3000);
         List<WebElement> AllPrices = driver.findElements(By.xpath(
                 "//div[@class='flex container justify-space-between']//div[@class='trainSubsChild']//div[1]//div[@class='ticket-price justify-flex-end']"));
-        // for (WebElement e : AllTrainsName) {
-        //     System.out.print(e.getText() + " ---> ");
-        //     for (int j = i; i <= AllPrices.size();) {
-        //         System.out.print("Rs ." + AllPrices.get(j).getText());
-        //         System.out.println();
-        //         i++;
-        //         break;
-        //     }
-        // }
+        for (WebElement e : AllTrainsName) {
+            System.out.print(e.getText() + " ---> ");
+            for (int j = i; i <= AllPrices.size();) {
+                System.out.print("Rs ." + AllPrices.get(j).getText());
+                System.out.println();
+                i++;
+                break;
+            }
+        }
         System.out.println("end Test case: testCase03");
     }
-
-
 
     public void testCase04() throws InterruptedException {
         System.out.println("Start Test case: testCase04");
@@ -293,7 +295,7 @@ public class TestCases {
         WebElement BusesFrom = driver.findElement(By.xpath("//div[@class='bussw_inputBox selectHtlCity'][1]"));
         BusesFrom.click();
         WebElement FromtextArea = driver.findElement(By.xpath("//input[@placeholder='From']"));
-        FromtextArea.sendKeys("bangal");
+        FromtextArea.sendKeys("bangl");
         Thread.sleep(5000);
         // System.out.println(driver.findElement(By.xpath(
         // "//div[@class='autoSuggestPlugin
@@ -309,11 +311,11 @@ public class TestCases {
         }
 
         // WebElement BusesTo = driver
-        //         .findElement(By.xpath("//*[@id='top-banner']/div[2]/div/div/div[2]/div/div[2]/label"));
+        // .findElement(By.xpath("//*[@id='top-banner']/div[2]/div/div/div[2]/div/div[2]/label"));
         // BusesTo.click();
         WebElement TolistTextarea = driver.findElement(By.xpath("//input[@placeholder='To']"));
         TolistTextarea.sendKeys("kathma");
-        Thread.sleep(5000); 
+        Thread.sleep(5000);
         List<WebElement> BusesToNearby = driver.findElements(By.xpath(
                 "//div[@class='autoSuggestPlugin hsw_autocomplePopup']//ul[@role='listbox']/li//span[@class='sr_city blackText']"));
         for (WebElement eachIf : BusesToNearby) {
@@ -324,7 +326,8 @@ public class TestCases {
             }
         }
 
-        // WebElement DatePickerEle = driver.findElement(By.xpath("//label[@for='travelDate']//p[1]"));
+        // WebElement DatePickerEle =
+        // driver.findElement(By.xpath("//label[@for='travelDate']//p[1]"));
         // DatePickerEle.click();
 
         String m1 = "June 2024";
@@ -354,15 +357,16 @@ public class TestCases {
 
         WebElement SearchBtn = driver.findElement(By.xpath("//button[@data-cy='submit']"));
         SearchBtn.click();
-        
-        WebElement NoBusesInfoEle =  driver.findElement(By.xpath("//*[@id='root']/div[1]/div[3]/div[1]/span[text()='No buses found for 29 Jun']"));
-        if(NoBusesInfoEle.getText().equalsIgnoreCase("No buses found for 29 Jun")){
-            System.out.println("end Test case: testCase04");
+
+        WebElement NoBusesInfoEle = driver
+                .findElement(By.xpath("//*[@id='root']/div[1]/div[3]/div[1]/span[text()='No buses found for 29 Jun']"));
+        // if (NoBusesInfoEle.getText().equalsIgnoreCase("No buses found for 29th of next month")) {
+        //     System.out.println("end Test case: testCase04");
+        // }
+        String ss = NoBusesInfoEle.getText();
+        if(NoBusesInfoEle.isDisplayed()){
+            System.out.println("No buses found for 29th of next month is displayed");
         }
-
-
+        System.out.println("end Test case: testCase04");
     }
-
-
-
 }
